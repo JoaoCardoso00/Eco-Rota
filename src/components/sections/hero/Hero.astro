@@ -1,0 +1,32 @@
+---
+import ButtonPrimary from '../../button/ButtonPrimary.astro';
+---
+
+<main class="flex h-[550px] justify-center">
+  <div
+    class="mt-20 flex h-full w-full items-center bg-[url('/img/heroIllustration.svg')] bg-no-repeat"
+  >
+    <div
+      class="ml-24 mb-12 flex h-fit w-fit flex-col items-center justify-center gap-8"
+    >
+      <div class="flex flex-col gap-8">
+        <h1 class="text-5xl">
+          Descubra a natureza em <br /> uma rota sustentável
+        </h1>
+        <span class="text-gray-600">
+          Rota do Ecoturismo comunitário. <br /> Venha conhecer a cultura, natureza
+          e produtos das <br /> ilhas de Belém em uma rota única e exótica.
+        </span>
+      </div>
+      <div class="flex w-full items-center gap-2">
+        <div class="w-52">
+          <ButtonPrimary text="Conheça nossos pacotes" />
+        </div>
+        <div class="flex gap-1">
+          <img src="/icons/MapPin.svg" alt="" class="h-6 w-6" />
+          <span class="text-gray-600">Cotijuba</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

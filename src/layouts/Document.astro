@@ -1,0 +1,45 @@
+---
+type Props = {
+  title: string;
+};
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Fredoka:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-gray-100">
+    <slot />
+  </body>
+</html>
+<style is:global>
+  html {
+    font-family: 'Fredoka One', sans-serif;
+    background-color: #f6f6f6;
+  }
+
+  @media (max-width: 1080px) {
+    html {
+      font-size: 93.75%;
+    }
+  }
+
+  @media (max-width: 720px) {
+    html {
+      font-size: 87.5%;
+    }
+  }
+</style>

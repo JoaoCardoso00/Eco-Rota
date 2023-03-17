@@ -1,0 +1,19 @@
+---
+import NavItem from './NavItem.astro';
+import ButtonPrimary from '../../button/ButtonPrimary.astro';
+---
+
+<nav class="mx-auto flex w-11/12 items-center justify-between pt-8">
+  <img src="/logos/eco-rota.svg" alt="Logo EcoRota" width="160" height="150" />
+  <div class="flex w-fit items-center justify-around gap-6">
+    <div class="flex w-fit items-center justify-center gap-6">
+      <NavItem href="#" text="Inicio" />
+      <NavItem href="#" text="Principios" />
+      <NavItem href="#" text="Quem somos" />
+      <NavItem href="#" text="Ajuda" />
+    </div>
+    <div class="w-36">
+      <ButtonPrimary text="Viaje Conosco" />
+    </div>
+  </div>
+</nav>
