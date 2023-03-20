@@ -4,15 +4,10 @@ import ButtonPrimary from '../../button/ButtonPrimary.astro';
 
 <main class="mx-auto mt-20 flex h-[550px] w-11/12 items-center justify-center">
   <div class="relative flex h-full w-full items-center">
-    <img
-      src="/img/bg-hero.svg"
-      alt=""
-      class="absolute right-0 left-0 bottom-0 top-0"
-    />
     <div
-      class="z-10 ml-24 mb-12 flex h-fit w-fit flex-col items-center justify-center gap-8"
+      class="z-10 mb-12 flex h-fit w-fit flex-col items-center justify-center gap-8 sm:ml-24"
     >
-      <div class="flex flex-col gap-8">
+      <div class="z-10 flex flex-col gap-8">
         <h1 class="text-5xl">
           Descubra a natureza em <br /> uma rota sustentável
         </h1>
@@ -21,7 +16,7 @@ import ButtonPrimary from '../../button/ButtonPrimary.astro';
           e produtos das <br /> ilhas de Belém em uma rota única e exótica.
         </span>
       </div>
-      <div class="flex w-full items-center gap-2">
+      <div class="z-10 flex w-full items-center gap-2">
         <div class="w-52">
           <ButtonPrimary text="Conheça nossos pacotes" />
         </div>
@@ -30,6 +25,21 @@ import ButtonPrimary from '../../button/ButtonPrimary.astro';
           <span class="text-gray-600">Cotijuba</span>
         </div>
       </div>
+      <img
+        src="/img/bg-hero.svg"
+        alt=""
+        class="absolute right-0 left-0 bottom-0 top-0 hidden h-[550px] lg:block"
+      />
+      <img
+        src="/img/bg-hero-small-screens.svg"
+        alt=""
+        class="absolute right-0 left-0 bottom-0 top-0 hidden h-[650px] sm:block lg:hidden"
+      />
+      <img
+        src="/img/bg-hero-cellphone.svg"
+        alt=""
+        class="absolute right-0 left-0 bottom-0 top-0 h-[500px] w-full sm:hidden"
+      />
     </div>
   </div>
 </main>
