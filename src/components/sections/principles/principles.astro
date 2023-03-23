@@ -1,0 +1,41 @@
+---
+import { Icon } from 'astro-icon';
+---
+
+<div
+  class="flex h-fit w-full items-center justify-center bg-[url('/textures/lines.svg')] bg-cover py-32"
+>
+  <div class="flex flex-col items-center gap-20">
+    <h1 class="text-center text-4xl">Nossos princípios</h1>
+    <div class="mx-auto flex w-fit flex-wrap justify-center gap-16">
+      <div class="w-52">
+        <div class="flex items-center gap-2">
+          <Icon name="ph:users-three" class="text-green-800" height={42} />
+          <h2 class="text-2xl text-green-800">Comunidade</h2>
+        </div>
+        <span class="text-sm text-gray-600">
+          Fomentar a economia das comunidades locais
+        </span>
+      </div>
+      <div class="w-60">
+        <div class="flex items-center">
+          <Icon name="ph:leaf" class="text-green-800" height={38} />
+          <h2 class="text-2xl text-green-800">Sustentabilidade</h2>
+        </div>
+        <span class="text-sm text-gray-600">
+          Ensinar sobre o cuidado do meio ambiente e os problemas existentes na
+          ilha
+        </span>
+      </div>
+      <div class="w-60">
+        <div class="flex items-center gap-2">
+          <Icon name="ph:flower-lotus" class="text-green-800" height={42} />
+          <h2 class="text-2xl text-green-800">Identidade</h2>
+        </div>
+        <span class="text-sm text-gray-600">
+          Atribuir identidade aos produtos feitos unicamente nas ilhas de Belém
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
