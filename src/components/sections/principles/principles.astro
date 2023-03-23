@@ -3,9 +3,29 @@ import { Icon } from 'astro-icon';
 ---
 
 <div
-  class="flex h-fit w-full items-center justify-center bg-[url('/textures/lines.svg')] bg-cover py-32"
+  class="relative flex h-fit w-full items-center justify-center bg-[url('/textures/lines.svg')] bg-cover py-32"
 >
-  <div class="flex flex-col items-center gap-20">
+  <img
+    src="/elements/plant_1.svg"
+    alt="imagem de uma planta"
+    class="absolute -left-12 top-0 h-48"
+  />
+  <img
+    src="/elements/plant_2.svg"
+    alt="imagem de uma planta"
+    class="absolute -left-12 bottom-2 h-48"
+  />
+  <img
+    src="/elements/plant_3.svg"
+    alt="imagem de uma planta"
+    class="absolute right-0 -top-10 h-48"
+  />
+  <img
+    src="/elements/plant_4.svg"
+    alt="imagem de uma planta"
+    class="absolute right-0 -bottom-4 h-48"
+  />
+  <div class="z-10 flex flex-col items-center gap-20">
     <h1 class="text-center text-4xl">Nossos princípios</h1>
     <div class="mx-auto flex w-fit flex-wrap justify-center gap-16">
       <div class="w-52">
