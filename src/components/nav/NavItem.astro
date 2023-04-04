@@ -8,4 +8,9 @@ type Props = HTMLAttributes<'a'> & {
 const { text, href, ...attrs } = Astro.props;
 ---
 
-<a href={href} {...attrs}>{text}</a>
+<a
+  href={href}
+  {...attrs}
+  class="relative block w-fit text-xl after:absolute after:block after:h-[3px] after:w-full after:origin-center after:scale-x-0 after:rounded-md after:bg-black after:transition after:duration-300 after:content-[''] after:hover:scale-x-100"
+  >{text}</a
+>
