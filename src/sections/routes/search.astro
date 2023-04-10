@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon';
+import { Search } from '../../components/search';
 ---
 
 <section
@@ -7,33 +7,6 @@ import { Icon } from 'astro-icon';
 >
   <div class="grid w-4/5 gap-6">
     <h1 class="text-center text-4xl">Venha viajar conosco!</h1>
-    <div class="flex h-16 items-center">
-      <div class="flex h-full w-full items-center">
-        <div
-          class="flex h-full items-center justify-center rounded-l-xl border border-r-0 border-gray-400 py-4 pl-4 pr-2"
-        >
-          <Icon name="ic:baseline-search" height={30} />
-        </div>
-        <input
-          type="text"
-          placeholder="Para onde vamos?"
-          class="h-full w-full border border-l-0 border-gray-400 bg-transparent py-6 px-2"
-        />
-      </div>
-      <div
-        class="flex h-full cursor-pointer items-center gap-2 border border-x-0 border-gray-400 px-4"
-      >
-        <img
-          src="/icons/Calendar.svg"
-          alt="icone de um calendario"
-          class="aspect-square h-8"
-        />
-        <span class="whitespace-nowrap">24 mar 2023</span>
-        <Icon name="tabler:chevron-down" height={60} />
-      </div>
-      <button class="h-full rounded-r-xl bg-green-800 px-12 text-white"
-        >Pesquisar</button
-      >
-    </div>
+    <Search />
   </div>
 </section>
