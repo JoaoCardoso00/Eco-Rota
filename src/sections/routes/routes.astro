@@ -1,0 +1,34 @@
+---
+import Route from '../../components/route.astro';
+---
+
+<div class="bg-gray-100">
+  <div class="mx-auto max-w-2xl px-4 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">
+    <div class="md:flex md:items-center md:justify-between">
+      <h2 class="text-2xl font-bold tracking-tight text-gray-900">Praias</h2>
+      <a
+        href="#"
+        class="hidden text-sm font-medium text-green-800 hover:text-green-600 md:block"
+      >
+        Veja mais rotas
+        <span aria-hidden="true"> &rarr;</span>
+      </a>
+    </div>
+
+    <di
+      class="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8"
+    >
+      <Route />
+      <Route />
+      <Route />
+      <Route />
+    </di>
+
+    <div class="mt-8 text-sm md:hidden">
+      <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+        Shop the collection
+        <span aria-hidden="true"> &rarr;</span>
+      </a>
+    </div>
+  </div>
+</div>
