@@ -9,6 +9,17 @@ import Faq from '../sections/Faq.astro';
 import Footer from '../sections/Footer.astro';
 ---
 
+<style>
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(html) {
+      scroll-behavior: auto;
+    }
+  }
+</style>
+
 <Document title="Eco Rota">
   <Hero />
   <Principles />
