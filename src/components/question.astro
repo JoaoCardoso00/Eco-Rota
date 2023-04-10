@@ -1,10 +1,15 @@
 ---
+type Props = {
+  question: string;
+  answer: string;
+};
+
+const { question, answer } = Astro.props;
 ---
 
 <div class="flex flex-col gap-2 text-xl">
-  <h2>How do you feel about the new design?</h2>
+  <h2>{question}</h2>
   <p class="text-sm text-gray-400">
-    we are working on a new design for the site. We would like to know what you
-    think about it. Please take a moment to fill out this short survey.
+    {answer}
   </p>
 </div>
