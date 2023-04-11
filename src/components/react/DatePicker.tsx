@@ -15,7 +15,7 @@ export function DatePicker({ date, setDate, currentDate }: DatePickerProps) {
       className="inline-block w-full text-left md:relative md:w-auto"
     >
       <div>
-        <Menu.Button className="flex h-full cursor-pointer items-center gap-2 border-x-0 border-gray-400">
+        <Menu.Button className="flex h-full w-full cursor-pointer items-center gap-2 border-x-0 border-gray-400">
           <img
             src="/icons/Calendar.svg"
             alt="icone de um calendario"
