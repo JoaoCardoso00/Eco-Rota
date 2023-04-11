@@ -1,12 +1,14 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { Calendar } from './Calendar';
+import { CalendarComponent } from './Calendar/Calendar';
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
-}
+type DatePickerProps = {
+  currentDate: string;
+  setDate: (value: Date) => void;
+  date: Date | (Date | null)[] | null;
+};
 
-export function DatePicker() {
+export function DatePicker({ date, setDate, currentDate }: DatePickerProps) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
@@ -16,7 +18,7 @@ export function DatePicker() {
             alt="icone de um calendario"
             className="aspect-square h-8"
           />
-          <span className="whitespace-nowrap">24 mar 2023</span>
+          <span className="whitespace-nowrap">{currentDate}</span>
           <img
             src="/icons/ChevronDown.svg"
             alt="seta pra baixo"
@@ -35,7 +37,7 @@ export function DatePicker() {
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items className="absolute -right-20 z-10 mt-6 w-96 origin-top-right rounded-md bg-white p-4 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <Calendar />
+          <CalendarComponent value={date} onChange={setDate} />
         </Menu.Items>
       </Transition>
     </Menu>

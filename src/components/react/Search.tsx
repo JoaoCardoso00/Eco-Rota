@@ -1,6 +1,18 @@
+import { useState } from 'react';
 import { DatePicker } from './DatePicker';
 
 export function Search() {
+  const [date, setDate] = useState<Date | null | (Date | null)[]>(new Date());
+
+  const formattedDate = new Intl.DateTimeFormat('pt-BR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  })
+    .format(date as Date)
+    .split(' de ')
+    .join(' ');
+
   return (
     <div className="flex h-16 items-center">
       <div className="flex h-full w-full items-center">
@@ -18,7 +30,7 @@ export function Search() {
         />
       </div>
       <div className="flex h-full cursor-pointer items-center gap-2 border border-x-0 border-gray-400 pl-4 pr-20">
-        <DatePicker />
+        <DatePicker date={date} setDate={setDate} currentDate={formattedDate} />
       </div>
       <button className="h-full rounded-r-xl bg-green-800 px-12 text-white hover:bg-green-700">
         Pesquisar
