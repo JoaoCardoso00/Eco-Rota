@@ -4,16 +4,25 @@ import ButtonPrimary from '../button/ButtonPrimary.astro';
 ---
 
 <nav class="mx-auto flex w-11/12 max-w-7xl items-center justify-between pt-8">
-  <img src="/logos/eco-rota.svg" alt="Logo EcoRota" width="160" height="150" />
+  <a href="/"
+    ><img
+      src="/logos/eco-rota.svg"
+      alt="Logo EcoRota"
+      width="160"
+      height="150"
+    /></a
+  >
   <div class="flex w-fit items-center justify-around gap-6">
-    <div class="hidden w-fit items-center justify-center gap-4 sm:flex">
+    <div class="hidden w-fit items-center justify-center gap-4 md:flex">
       <NavItem href="/" text="Inicio" />
-      <NavItem href="#principles" text="Principios" />
-      <NavItem href="#about" text="Quem somos" />
-      <NavItem href="#faq" text="Ajuda" />
+      <NavItem href="/#principles" text="Principios" />
+      <NavItem href="/#about" text="Quem somos" />
+      <NavItem href="/#faq" text="Ajuda" />
     </div>
     <div class="w-36">
-      <ButtonPrimary text="Viaje Conosco" />
+      <a href="/routes">
+        <ButtonPrimary text="Viaje Conosco" />
+      </a>
     </div>
   </div>
 </nav>
