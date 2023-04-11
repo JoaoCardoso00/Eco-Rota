@@ -10,7 +10,10 @@ type DatePickerProps = {
 
 export function DatePicker({ date, setDate, currentDate }: DatePickerProps) {
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu
+      as="div"
+      className="inline-block w-full text-left md:relative md:w-auto"
+    >
       <div>
         <Menu.Button className="flex h-full cursor-pointer items-center gap-2 border-x-0 border-gray-400">
           <img
@@ -36,7 +39,7 @@ export function DatePicker({ date, setDate, currentDate }: DatePickerProps) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute -right-20 z-10 mt-6 w-96 origin-top-right rounded-md bg-white p-4 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute left-0 right-0 z-10 mx-auto mt-6 w-80 origin-top-right rounded-md bg-white p-4 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:w-96 md:-right-20 md:left-auto">
           <CalendarComponent value={date} onChange={setDate} />
         </Menu.Items>
       </Transition>

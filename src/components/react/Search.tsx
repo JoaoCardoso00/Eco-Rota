@@ -14,9 +14,9 @@ export function Search() {
     .join(' ');
 
   return (
-    <div className="flex h-16 items-center">
+    <div className="flex flex-col items-center md:h-16 md:flex-row">
       <div className="flex h-full w-full items-center">
-        <div className="flex h-full cursor-pointer items-center justify-center rounded-l-xl border border-r-0 border-gray-400 py-4 pl-4 pr-2">
+        <div className="flex h-full cursor-pointer items-center justify-center rounded-tl-xl border border-r-0 border-gray-400 py-4 pl-4 pr-2 md:rounded-l-xl">
           <img
             src="/icons/Search.svg"
             alt="bussola"
@@ -26,13 +26,13 @@ export function Search() {
         <input
           type="text"
           placeholder="Para onde vamos?"
-          className="h-full w-full border border-l-0 border-gray-400 bg-transparent py-6 px-2"
+          className="rounded-t-0 md:rounded-tr-0 h-full w-full rounded-tr-xl border border-l-0 border-gray-400 bg-transparent py-6 px-2 md:rounded-tr-none md:border-r-0"
         />
       </div>
-      <div className="flex h-full cursor-pointer items-center gap-2 border border-x-0 border-gray-400 pl-4 pr-20">
+      <div className="flex h-full w-full cursor-pointer items-center gap-2 border border-t-0 border-gray-400 py-4 pl-4 md:w-60 md:border-x-0 md:border-y md:border-l md:pr-20">
         <DatePicker date={date} setDate={setDate} currentDate={formattedDate} />
       </div>
-      <button className="h-full rounded-r-xl bg-green-800 px-12 text-white hover:bg-green-700">
+      <button className="h-full w-full rounded-b-xl bg-green-800 py-6 px-12 text-white hover:bg-green-700 md:w-96 md:rounded-r-xl md:rounded-bl-none">
         Pesquisar
       </button>
     </div>
