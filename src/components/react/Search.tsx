@@ -32,7 +32,7 @@ export function Search() {
       <div className="flex h-full w-full cursor-pointer items-center gap-2 border border-t-0 border-gray-400 py-4 pl-4 md:w-60 md:border-x-0 md:border-y md:border-l md:pr-20">
         <DatePicker date={date} setDate={setDate} currentDate={formattedDate} />
       </div>
-      <button className="h-full w-full rounded-b-xl bg-green-800 py-6 px-12 text-white hover:bg-green-700 md:w-96 md:rounded-r-xl md:rounded-bl-none">
+      <button className="flex h-full w-full items-center justify-center rounded-b-xl bg-green-800 py-6 px-12 text-xl text-white hover:bg-green-700 md:w-96 md:rounded-r-xl md:rounded-bl-none">
         Pesquisar
       </button>
     </div>
