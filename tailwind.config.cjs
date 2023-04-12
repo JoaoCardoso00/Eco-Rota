@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         fredoka: ['Fredoka', 'cursive'],
+        inter: ['Inter', 'sans-serif'],
       },
       extend: {
         gridTemplateRows: {
