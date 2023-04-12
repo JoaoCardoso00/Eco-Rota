@@ -6,7 +6,15 @@ module.exports = {
       fontFamily: {
         fredoka: ['Fredoka', 'cursive'],
       },
+      extend: {
+        gridTemplateRows: {
+          '[auto,auto,1fr]': 'auto auto 1fr',
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/aspect-ratio'),
+  ],
 };
