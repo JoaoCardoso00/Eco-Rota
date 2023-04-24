@@ -1,23 +1,48 @@
 ---
+type Props = {
+  name: string;
+  slug: string;
+  time: string;
+  experience: string[];
+  fullPrice: number;
+  priceWithDiscount: number;
+  priceInstallmentsNumber: number;
+  image: string;
+  imageAlt: string;
+  tags: string[];
+};
+
+const {
+  name,
+  slug,
+  time,
+  experience,
+  fullPrice,
+  priceWithDiscount,
+  priceInstallmentsNumber,
+  image,
+  tags,
+  imageAlt,
+} = Astro.props;
 ---
 
-<a href="#" class="group relative w-full min-w-min">
+<a href={`/routes/${slug}`} class="group relative w-full min-w-min">
   <div
     class="h-fit w-full overflow-hidden rounded-md bg-white pb-4 shadow-lg transition-all group-hover:opacity-75"
   >
-    <span
-      class="absolute right-2 top-2 items-center rounded-md bg-[#ED7681] px-3.5 py-1.5 font-fredoka text-sm font-medium text-white shadow-md"
-      >Cotico</span
-    >
-    <img
-      src="/img/vai-quem-quer.webp"
-      alt="Hand stitched, orange leather long wallet."
-      class="w-full object-cover object-center"
-    />
+    {
+      tags.map((tag) => {
+        return (
+          <span class="font-fredoka absolute right-2 top-2 items-center rounded-md bg-[#ED7681] px-3.5 py-1.5 text-sm font-medium text-white shadow-md">
+            {tag}
+          </span>
+        );
+      })
+    }
+    <img src={image} alt={imageAlt} class="w-full object-cover object-center" />
     <div class="grid gap-2 px-3">
       <h3 class="mt-4 text-base text-gray-700">
-        <span class="absolute inset-0"></span>
-        Praia Vai Quem Quer - 23 mar
+        {name}
       </h3>
       <div class="flex items-center gap-2">
         <img
@@ -25,48 +50,32 @@
           alt="icone de um relógio"
           class="aspect-square h-4"
         />
-        <span class="font-fredoka text-sm font-bold">4 a 5 Horas</span>
+        <span class="font-fredoka text-sm font-bold">{time}</span>
       </div>
       <ul class="my-4 grid gap-1">
-        <li class="flex items-center gap-2">
-          <img
-            src="/icons/check.svg"
-            alt="icone ok"
-            class="aspect-square h-4"
-          />
-          <span class="font-fredoka text-xs">Experiência EcoRota</span>
-        </li>
-        <li class="flex items-center gap-2">
-          <img
-            src="/icons/check.svg"
-            alt="icone ok"
-            class="aspect-square h-4"
-          />
-          <span class="font-fredoka text-xs">Experiência EcoRota</span>
-        </li>
-        <li class="flex items-center gap-2">
-          <img
-            src="/icons/check.svg"
-            alt="icone ok"
-            class="aspect-square h-4"
-          />
-          <span class="font-fredoka text-xs">Experiência EcoRota</span>
-        </li>
-        <li class="flex items-center gap-2">
-          <img
-            src="/icons/check.svg"
-            alt="icone ok"
-            class="aspect-square h-4"
-          />
-          <span class="font-fredoka text-xs">Experiência EcoRota</span>
-        </li>
+        {
+          experience.map((item) => {
+            return (
+              <li class="flex items-center gap-2">
+                <img
+                  src="/icons/check.svg"
+                  alt="icone de um relógio"
+                  class="aspect-square h-4"
+                />
+                <span class="text-sm text-gray-700">{item}</span>
+              </li>
+            );
+          })
+        }
       </ul>
       <div class="grid gap-1">
         <span class="font-fredoka text-xs"
-          >A partir de <span class="line-through">R$ 1756</span></span
+          >A partir de <span class="line-through">R$ {fullPrice}</span></span
         >
-        <span class="text-green-800">R$ 983</span>
-        <span class="font-fredoka text-xs">Em até 12x</span>
+        <span class="text-green-800">R$ {priceWithDiscount}</span>
+        <span class="font-fredoka text-xs"
+          >Em até {priceInstallmentsNumber}x</span
+        >
       </div>
     </div>
   </div>
