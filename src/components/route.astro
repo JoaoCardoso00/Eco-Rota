@@ -6,10 +6,9 @@ type Props = Route;
 const {
   name,
   slug,
-  time,
+  duration,
   experience,
   fullPrice,
-  description,
   priceWithDiscount,
   priceInstallmentsNumber,
   images,
@@ -51,7 +50,7 @@ const formattedFullPrice = new Intl.NumberFormat('pt-BR', {
           alt="icone de um relógio"
           class="aspect-square h-4"
         />
-        <span class="font-fredoka text-sm font-bold">{time}</span>
+        <span class="font-fredoka text-sm font-bold">{duration}</span>
       </div>
       <ul class="my-4 grid gap-1">
         {

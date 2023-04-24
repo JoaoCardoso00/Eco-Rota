@@ -2,7 +2,7 @@ import type { Route } from '../types/Route';
 
 export const routes: Route[] = [
   {
-    name: 'Praia vai quem quer - 23 mar',
+    name: 'Praia vai quem quer',
     slug: 'praia-vai-quem-quer',
     duration: '4 a 5 Horas',
     dueDate: new Date('2021-03-23'),
