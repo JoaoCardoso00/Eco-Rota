@@ -1,16 +1,7 @@
 ---
-type Props = {
-  name: string;
-  slug: string;
-  time: string;
-  experience: string[];
-  fullPrice: number;
-  priceWithDiscount: number;
-  priceInstallmentsNumber: number;
-  image: string;
-  imageAlt: string;
-  tags: string[];
-};
+import type { Route } from '../types/Route';
+
+type Props = Route;
 
 const {
   name,
@@ -18,12 +9,22 @@ const {
   time,
   experience,
   fullPrice,
+  description,
   priceWithDiscount,
   priceInstallmentsNumber,
-  image,
+  images,
   tags,
-  imageAlt,
 } = Astro.props;
+
+const formattedPriceWithDiscount = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+}).format(priceWithDiscount);
+
+const formattedFullPrice = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+}).format(fullPrice);
 ---
 
 <a href={`/routes/${slug}`} class="group relative w-full min-w-min">
@@ -39,7 +40,7 @@ const {
         );
       })
     }
-    <img src={image} alt={imageAlt} class="w-full object-cover object-center" />
+    <img src={images[0]} class="w-full object-cover object-center" />
     <div class="grid gap-2 px-3">
       <h3 class="mt-4 text-base text-gray-700">
         {name}
@@ -70,9 +71,10 @@ const {
       </ul>
       <div class="grid gap-1">
         <span class="font-fredoka text-xs"
-          >A partir de <span class="line-through">R$ {fullPrice}</span></span
+          >A partir de <span class="line-through">{formattedFullPrice}</span
+          ></span
         >
-        <span class="text-green-800">R$ {priceWithDiscount}</span>
+        <span class="text-green-800">{formattedPriceWithDiscount}</span>
         <span class="font-fredoka text-xs"
           >Em até {priceInstallmentsNumber}x</span
         >
