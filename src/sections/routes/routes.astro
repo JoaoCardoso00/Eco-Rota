@@ -1,8 +1,9 @@
 ---
 import Route from '../../components/route.astro';
+import { routes } from '../../utils/routes';
 ---
 
-<div class="bg-gray-100">
+<div>
   <div class="mx-auto max-w-2xl px-4 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">
     <div class="md:flex md:items-center md:justify-between">
       <h2 class="text-2xl font-bold tracking-tight text-gray-900">Praias</h2>
@@ -15,14 +16,26 @@ import Route from '../../components/route.astro';
       </a>
     </div>
 
-    <di
+    <ul
       class="mt-6 grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-6 md:gap-4 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4"
     >
-      <Route />
-      <Route />
-      <Route />
-      <Route />
-    </di>
+      {
+        routes.map((route) => (
+          <Route
+            name={route.name}
+            slug={route.slug}
+            experience={route.experience}
+            fullPrice={route.fullPrice}
+            time={route.time}
+            image={route.image}
+            imageAlt={route.imageAlt}
+            priceWithDiscount={route.priceWithDiscount}
+            priceInstallmentsNumber={route.priceInstallmentsNumber}
+            tags={route.tags}
+          />
+        ))
+      }
+    </ul>
 
     <div class="mt-8 text-sm md:hidden">
       <a href="#" class="font-medium text-green-800 hover:text-green-600">
