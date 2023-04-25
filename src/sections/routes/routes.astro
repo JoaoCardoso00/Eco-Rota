@@ -24,14 +24,17 @@ import { routes } from '../../utils/routes';
           <Route
             name={route.name}
             slug={route.slug}
+            availableHours={route.availableHours}
             experience={route.experience}
             fullPrice={route.fullPrice}
-            time={route.time}
-            image={route.image}
-            imageAlt={route.imageAlt}
+            dueDate={route.dueDate}
+            duration={route.duration}
+            description={route.description}
+            images={route.images}
             priceWithDiscount={route.priceWithDiscount}
             priceInstallmentsNumber={route.priceInstallmentsNumber}
             tags={route.tags}
+            reviews={route.reviews}
           />
         ))
       }
