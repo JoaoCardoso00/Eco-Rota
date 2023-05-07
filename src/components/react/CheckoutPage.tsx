@@ -84,8 +84,8 @@ export function CheckoutPage() {
                 Informações para contato
               </h2>
               <span className="font-fredoka text-xs text-gray-500">
-                Pedimos as informações de uma pessoa responsável que irá para
-                viagem para melhor organização do nosso time.
+                Pedimos as informações de uma pessoa que irá para viagem para
+                melhor organização do nosso time.
               </span>
 
               <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
@@ -129,7 +129,7 @@ export function CheckoutPage() {
                     htmlFor="last-name"
                     className="block font-fredoka text-sm font-medium text-gray-700"
                   >
-                    Ultimo nome
+                    Último nome
                   </label>
                   <div className="mt-1">
                     <input
@@ -165,7 +165,7 @@ export function CheckoutPage() {
                     htmlFor="gender"
                     className="block font-fredoka text-sm font-medium text-gray-700"
                   >
-                    Genero
+                    Gênero
                   </label>
                   <div className="mt-1">
                     <select
@@ -246,7 +246,7 @@ export function CheckoutPage() {
                     htmlFor="card-number"
                     className="block font-fredoka text-sm font-medium text-gray-700"
                   >
-                    Card number
+                    Número do cartão
                   </label>
                   <div className="mt-1">
                     <input
@@ -264,7 +264,7 @@ export function CheckoutPage() {
                     htmlFor="name-on-card"
                     className="block font-fredoka text-sm font-medium text-gray-700"
                   >
-                    Name on card
+                    Nome no cartão
                   </label>
                   <div className="mt-1">
                     <input
@@ -282,7 +282,7 @@ export function CheckoutPage() {
                     htmlFor="expiration-date"
                     className="block font-fredoka text-sm font-medium text-gray-700"
                   >
-                    Expiration date (MM/YY)
+                    Validade (MM/YY)
                   </label>
                   <div className="mt-1">
                     <input
