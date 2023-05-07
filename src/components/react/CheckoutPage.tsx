@@ -1,4 +1,5 @@
 import { UserGroupIcon } from '@heroicons/react/24/outline';
+import { CalendarIcon } from '@heroicons/react/24/outline';
 
 const products = [
   {
@@ -302,8 +303,13 @@ export function CheckoutPage() {
                       </div>
                       <div className="my-1" />
                       <div className="flex items-center gap-2">
-                        <UserGroupIcon className="h-6 w-6 text-green-800" />
-                        <span className="font-fredoka">1 pessoas</span>
+                        <UserGroupIcon className="h-4 w-4 text-green-800" />
+                        <span className="font-fredoka text-sm">1 pessoas</span>
+                      </div>
+                      <div className="my-1" />
+                      <div className="flex items-center gap-2">
+                        <CalendarIcon className="h-4 w-4 text-green-800" />
+                        <span className="font-fredoka text-sm">24 mar</span>
                       </div>
                       <div className="flex flex-1 items-end justify-between pt-2">
                         <p className="mt-1 font-fredoka text-sm font-medium text-gray-900">
