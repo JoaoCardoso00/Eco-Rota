@@ -28,28 +28,10 @@ export function CheckoutPage() {
           <div>
             <div>
               <h2 className="font-fredoka text-lg font-medium text-gray-900">
-                Informações para contato
+                Informações da viagem
               </h2>
 
               <div className="mt-4 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2 sm:gap-x-4">
-                <div className="col-span-2 mt-4">
-                  <label
-                    htmlFor="email-address"
-                    className="block font-fredoka text-sm font-medium text-gray-700"
-                  >
-                    Email
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="email"
-                      id="email-address"
-                      name="email-address"
-                      autoComplete="email"
-                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
                 <div>
                   <label
                     htmlFor="quantity-of-people"
@@ -99,7 +81,7 @@ export function CheckoutPage() {
 
             <div className="mt-10 border-t border-gray-200 pt-10">
               <h2 className="font-fredoka text-lg font-medium text-gray-900">
-                Informações pessoais
+                Informações para contato
               </h2>
               <span className="font-fredoka text-xs text-gray-500">
                 Pedimos as informações de uma pessoa responsável que irá para
@@ -107,6 +89,23 @@ export function CheckoutPage() {
               </span>
 
               <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+                <div className="col-span-2 mt-4">
+                  <label
+                    htmlFor="email-address"
+                    className="block font-fredoka text-sm font-medium text-gray-700"
+                  >
+                    Email
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="email"
+                      id="email-address"
+                      name="email-address"
+                      autoComplete="email"
+                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
+                    />
+                  </div>
+                </div>
                 <div>
                   <label
                     htmlFor="first-name"
