@@ -28,31 +28,60 @@ export function CheckoutPage() {
           <div>
             <div>
               <h2 className="font-fredoka text-lg font-medium text-gray-900">
-                Informações para contato
+                Informações da viagem
               </h2>
 
-              <div className="mt-4">
-                <label
-                  htmlFor="email-address"
-                  className="block font-fredoka text-sm font-medium text-gray-700"
-                >
-                  Email
-                </label>
-                <div className="mt-1">
-                  <input
-                    type="email"
-                    id="email-address"
-                    name="email-address"
-                    autoComplete="email"
-                    className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
-                  />
+              <div className="mt-4 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2 sm:gap-x-4">
+                <div>
+                  <label
+                    htmlFor="quantity-of-people"
+                    className="block font-fredoka text-sm font-medium text-gray-700"
+                  >
+                    Quantidade de pessoas
+                  </label>
+                  <div className="mt-1">
+                    <select
+                      id="quantity-of-people"
+                      name="quantity-of-people"
+                      autoComplete="quantity-of-people"
+                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
+                    >
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                    </select>
+                  </div>
+                </div>
+                <div>
+                  <label
+                    htmlFor="time"
+                    className="block font-fredoka text-sm font-medium text-gray-700"
+                  >
+                    Horário de partida
+                  </label>
+                  <div className="mt-1">
+                    <select
+                      id="time"
+                      name="time"
+                      autoComplete="time"
+                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
+                    >
+                      <option>17:00</option>
+                      <option>20:00</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div className="mt-10 border-t border-gray-200 pt-10">
               <h2 className="font-fredoka text-lg font-medium text-gray-900">
-                Informações pessoais
+                Informações para contato
               </h2>
               <span className="font-fredoka text-xs text-gray-500">
                 Pedimos as informações de uma pessoa responsável que irá para
@@ -60,6 +89,23 @@ export function CheckoutPage() {
               </span>
 
               <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+                <div className="col-span-2 mt-4">
+                  <label
+                    htmlFor="email-address"
+                    className="block font-fredoka text-sm font-medium text-gray-700"
+                  >
+                    Email
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="email"
+                      id="email-address"
+                      name="email-address"
+                      autoComplete="email"
+                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
+                    />
+                  </div>
+                </div>
                 <div>
                   <label
                     htmlFor="first-name"
@@ -313,27 +359,8 @@ export function CheckoutPage() {
                       </div>
                       <div className="flex flex-1 items-end justify-between pt-2">
                         <p className="mt-1 font-fredoka text-sm font-medium text-gray-900">
-                          {product.price}
+                          {product.price} / pessoa
                         </p>
-                        <div className="ml-4">
-                          <label htmlFor="quantity" className="sr-only">
-                            Quantidade de pessoas
-                          </label>
-                          <select
-                            id="quantity"
-                            name="quantity"
-                            className="rounded-md border border-gray-300 text-left text-base font-medium text-gray-700 shadow-sm focus:border-green-800 focus:outline-none focus:ring-1 focus:ring-green-800 sm:text-sm"
-                          >
-                            <option value={1}>1</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                            <option value={5}>5</option>
-                            <option value={6}>6</option>
-                            <option value={7}>7</option>
-                            <option value={8}>8</option>
-                          </select>
-                        </div>
                       </div>
                     </div>
                   </li>
@@ -343,19 +370,19 @@ export function CheckoutPage() {
                 <div className="flex items-center justify-between">
                   <dt className="text-sm">Subtotal</dt>
                   <dd className="font-fredoka text-sm font-medium text-gray-900">
-                    $64.00
+                    R$ 64.00
                   </dd>
                 </div>
                 <div className="flex items-center justify-between">
                   <dt className="text-sm">Seguro</dt>
                   <dd className="font-fredoka text-sm font-medium text-gray-900">
-                    $5.00
+                    R$ 5.00
                   </dd>
                 </div>
                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                   <dt className="text-base font-medium">Total</dt>
                   <dd className="font-fredoka text-base font-medium text-gray-900">
-                    $75.52
+                    R$ 75.52
                   </dd>
                 </div>
               </dl>
