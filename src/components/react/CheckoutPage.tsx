@@ -1,5 +1,24 @@
 import { UserGroupIcon } from '@heroicons/react/24/outline';
 import { CalendarIcon } from '@heroicons/react/24/outline';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+
+const schema = z.object({
+  quantityOfPeople: z.string(),
+  time: z.string(),
+  email: z
+    .string()
+    .email({ message: 'Favor inserir um email valido' })
+    .min(1, { message: 'Email é obrigatório' }),
+  firstName: z.string().min(1, { message: 'Nome é obrigatório' }),
+  lastName: z.string().min(1, { message: 'Sobrenome é obrigatório' }),
+  cpf: z.string().min(11, { message: 'CPF é obrigatório' }),
+  gender: z.string(),
+  phone: z.string().min(11, { message: 'Telefone é obrigatório' }),
+});
+
+type FormData = z.infer<typeof schema>;
 
 const products = [
   {
@@ -19,12 +38,29 @@ const paymentMethods = [
 ];
 
 export function CheckoutPage() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
+
+  console.log(errors);
+
+  function handleConfirmPurchase(data: FormData) {
+    console.log(data);
+  }
+
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Checkout</h2>
 
-        <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+        <form
+          className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16"
+          onSubmit={handleSubmit(handleConfirmPurchase)}
+        >
           <div>
             <div>
               <h2 className="font-fredoka text-lg font-medium text-gray-900">
@@ -33,46 +69,39 @@ export function CheckoutPage() {
 
               <div className="mt-4 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2 sm:gap-x-4">
                 <div>
-                  <label
-                    htmlFor="quantity-of-people"
-                    className="block font-fredoka text-sm font-medium text-gray-700"
-                  >
+                  <label className="block font-fredoka text-sm font-medium text-gray-700">
                     Quantidade de pessoas
                   </label>
                   <div className="mt-1">
                     <select
-                      id="quantity-of-people"
-                      name="quantity-of-people"
+                      {...register('quantityOfPeople')}
                       autoComplete="quantity-of-people"
                       className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
                     >
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>6</option>
-                      <option>7</option>
-                      <option>8</option>
+                      <option value={1}>1</option>
+                      <option value={2}>2</option>
+                      <option value={3}>3</option>
+                      <option value={4}>4</option>
+                      <option value={5}>5</option>
+                      <option value={6}>6</option>
+                      <option value={7}>7</option>
+                      <option value={8}>8</option>
                     </select>
                   </div>
                 </div>
                 <div>
-                  <label
-                    htmlFor="time"
-                    className="block font-fredoka text-sm font-medium text-gray-700"
-                  >
+                  <label className="block font-fredoka text-sm font-medium text-gray-700">
                     Horário de partida
                   </label>
                   <div className="mt-1">
                     <select
-                      id="time"
-                      name="time"
+                      {...register('time')}
                       autoComplete="time"
                       className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
+                      defaultValue="09:00"
                     >
-                      <option>17:00</option>
-                      <option>20:00</option>
+                      <option value="17:00">17:00</option>
+                      <option value="20:00">20:00</option>
                     </select>
                   </div>
                 </div>
@@ -91,8 +120,9 @@ export function CheckoutPage() {
               <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
                 <div className="col-span-2 mt-4">
                   <label
-                    htmlFor="email-address"
-                    className="block font-fredoka text-sm font-medium text-gray-700"
+                    className={`block font-fredoka text-sm font-medium text-gray-700 ${
+                      errors.email ? 'text-red-500' : ''
+                    }`}
                   >
                     Email
                   </label>
@@ -100,16 +130,20 @@ export function CheckoutPage() {
                     <input
                       type="email"
                       id="email-address"
-                      name="email-address"
+                      {...register('email')}
                       autoComplete="email"
-                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
+                      className={`block w-full rounded-md border-gray-300 font-fredoka shadow-sm placeholder:text-red-500 focus:border-green-800 focus:ring-green-800 sm:text-sm ${
+                        errors.email ? 'border-red-500' : ''
+                      }`}
+                      placeholder={errors.email?.message ?? ''}
                     />
                   </div>
                 </div>
                 <div>
                   <label
-                    htmlFor="first-name"
-                    className="block font-fredoka text-sm font-medium text-gray-700"
+                    className={`block font-fredoka text-sm font-medium text-gray-700 ${
+                      errors.firstName ? 'text-red-500' : ''
+                    }`}
                   >
                     Primeiro nome
                   </label>
@@ -117,17 +151,21 @@ export function CheckoutPage() {
                     <input
                       type="text"
                       id="first-name"
-                      name="first-name"
+                      {...register('firstName')}
                       autoComplete="given-name"
-                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
+                      className={`block w-full rounded-md border-gray-300 font-fredoka shadow-sm placeholder:text-red-500 focus:border-green-800 focus:ring-green-800 sm:text-sm ${
+                        errors.firstName ? 'border-red-500' : ''
+                      }`}
+                      placeholder={errors.firstName?.message ?? ''}
                     />
                   </div>
                 </div>
 
                 <div>
                   <label
-                    htmlFor="last-name"
-                    className="block font-fredoka text-sm font-medium text-gray-700"
+                    className={`block font-fredoka text-sm font-medium text-gray-700 ${
+                      errors.lastName ? 'text-red-500' : ''
+                    }`}
                   >
                     Último nome
                   </label>
@@ -135,66 +173,75 @@ export function CheckoutPage() {
                     <input
                       type="text"
                       id="last-name"
-                      name="last-name"
+                      {...register('lastName')}
                       autoComplete="family-name"
-                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
+                      className={`block w-full rounded-md border-gray-300 font-fredoka shadow-sm placeholder:text-red-500 focus:border-green-800 focus:ring-green-800 sm:text-sm ${
+                        errors.lastName ? 'border-red-500' : ''
+                      }`}
+                      placeholder={errors.lastName?.message ?? ''}
                     />
                   </div>
                 </div>
 
                 <div>
                   <label
-                    htmlFor="CPF"
-                    className="block font-fredoka text-sm font-medium text-gray-700"
+                    className={`block font-fredoka text-sm font-medium text-gray-700 ${
+                      errors.cpf ? 'text-red-500' : ''
+                    }`}
                   >
                     CPF
                   </label>
                   <div className="mt-1">
                     <input
                       type="text"
-                      name="CPF"
                       id="CPF"
+                      {...register('cpf')}
                       autoComplete="CPF"
-                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
+                      className={`block w-full rounded-md border-gray-300 font-fredoka shadow-sm placeholder:text-red-500 focus:border-green-800 focus:ring-green-800 sm:text-sm ${
+                        errors.cpf ? 'border-red-500' : ''
+                      }`}
+                      placeholder={errors.cpf?.message ?? ''}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="gender"
-                    className="block font-fredoka text-sm font-medium text-gray-700"
-                  >
+                  <label className="block font-fredoka text-sm font-medium text-gray-700">
                     Gênero
                   </label>
                   <div className="mt-1">
                     <select
                       id="gender"
-                      name="gender"
+                      {...register('gender')}
                       autoComplete="gender"
                       className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
+                      defaultValue="Masculino"
                     >
-                      <option>Masculino</option>
-                      <option>Feminino</option>
-                      <option>Outro</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Feminino">Feminino</option>
+                      <option value="Outro">Outro</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="sm:col-span-2">
                   <label
-                    htmlFor="phone"
-                    className="block font-fredoka text-sm font-medium text-gray-700"
+                    className={`block font-fredoka text-sm font-medium text-gray-700 ${
+                      errors.phone ? 'text-red-500' : ''
+                    }`}
                   >
                     Telefone
                   </label>
                   <div className="mt-1">
                     <input
                       type="text"
-                      name="phone"
+                      {...register('phone')}
                       id="phone"
                       autoComplete="tel"
-                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
+                      className={`block w-full rounded-md border-gray-300 font-fredoka shadow-sm placeholder:text-red-500 focus:border-green-800 focus:ring-green-800 sm:text-sm ${
+                        errors.phone ? 'border-red-500' : ''
+                      }`}
+                      placeholder={errors.phone?.message ?? ''}
                     />
                   </div>
                 </div>
@@ -215,7 +262,6 @@ export function CheckoutPage() {
                       {paymentMethodIdx === 0 ? (
                         <input
                           id={paymentMethod.id}
-                          name="payment-type"
                           type="radio"
                           defaultChecked
                           className="h-4 w-4 border-gray-300 text-green-800 focus:ring-green-800"
@@ -229,10 +275,7 @@ export function CheckoutPage() {
                         />
                       )}
 
-                      <label
-                        htmlFor={paymentMethod.id}
-                        className="ml-3 block font-fredoka text-sm font-medium text-gray-700"
-                      >
+                      <label className="ml-3 block font-fredoka text-sm font-medium text-gray-700">
                         {paymentMethod.title}
                       </label>
                     </div>
@@ -242,10 +285,7 @@ export function CheckoutPage() {
 
               <div className="mt-6 grid grid-cols-4 gap-x-4 gap-y-6">
                 <div className="col-span-4">
-                  <label
-                    htmlFor="card-number"
-                    className="block font-fredoka text-sm font-medium text-gray-700"
-                  >
+                  <label className="block font-fredoka text-sm font-medium text-gray-700">
                     Número do cartão
                   </label>
                   <div className="mt-1">
@@ -260,10 +300,7 @@ export function CheckoutPage() {
                 </div>
 
                 <div className="col-span-4">
-                  <label
-                    htmlFor="name-on-card"
-                    className="block font-fredoka text-sm font-medium text-gray-700"
-                  >
+                  <label className="block font-fredoka text-sm font-medium text-gray-700">
                     Nome no cartão
                   </label>
                   <div className="mt-1">
@@ -278,10 +315,7 @@ export function CheckoutPage() {
                 </div>
 
                 <div className="col-span-3">
-                  <label
-                    htmlFor="expiration-date"
-                    className="block font-fredoka text-sm font-medium text-gray-700"
-                  >
+                  <label className="block font-fredoka text-sm font-medium text-gray-700">
                     Validade (MM/YY)
                   </label>
                   <div className="mt-1">
@@ -296,10 +330,7 @@ export function CheckoutPage() {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="cvc"
-                    className="block font-fredoka text-sm font-medium text-gray-700"
-                  >
+                  <label className="block font-fredoka text-sm font-medium text-gray-700">
                     CVC
                   </label>
                   <div className="mt-1">
