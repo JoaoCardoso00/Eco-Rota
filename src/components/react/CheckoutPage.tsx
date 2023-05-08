@@ -46,8 +46,6 @@ export function CheckoutPage() {
     resolver: zodResolver(schema),
   });
 
-  console.log(errors);
-
   function handleConfirmPurchase(data: FormData) {
     console.log(data);
   }
@@ -262,6 +260,7 @@ export function CheckoutPage() {
                       {paymentMethodIdx === 0 ? (
                         <input
                           id={paymentMethod.id}
+                          name="payment-type"
                           type="radio"
                           defaultChecked
                           className="h-4 w-4 border-gray-300 text-green-800 focus:ring-green-800"
