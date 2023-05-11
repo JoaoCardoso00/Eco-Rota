@@ -3,6 +3,9 @@ import { CalendarIcon } from '@heroicons/react/24/outline';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import type { Route } from '../../types/Route';
+import { useState } from 'react';
+import { CardPayment, PixPayment } from './PaymentTypes';
 
 const schema = z.object({
   quantityOfPeople: z.string(),
@@ -20,24 +23,29 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-const products = [
-  {
-    id: 1,
-    title: 'Praia vai quem quer',
-    href: '#',
-    price: 'R$ 32.00',
-    color: 'Black',
-    size: 'Large',
-    imageSrc: '/img/vai-quem-quer.webp',
-    imageAlt: "Front of men's Basic Tee in black.",
-  },
-];
 const paymentMethods = [
   { id: 'credit-card', title: 'Cartão de crédito' },
   { id: 'pix', title: 'PIX' },
-];
+] as const;
 
-export function CheckoutPage() {
+type PaymentMethods = (typeof paymentMethods)[number]['id'] | null;
+
+type Props = {
+  routeData: Route;
+};
+
+function formatPrice(price: number) {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(price);
+}
+
+export function CheckoutPage({ routeData }: Props) {
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState<PaymentMethods>(null);
+  const [numOfPeople, setNumOfPeople] = useState(1);
+
   const {
     register,
     handleSubmit,
@@ -46,8 +54,25 @@ export function CheckoutPage() {
     resolver: zodResolver(schema),
   });
 
+  const SubTotalPrice = routeData.priceWithDiscount * numOfPeople;
+  const AssurancePrice = 10 * numOfPeople;
+  const fullPrice = SubTotalPrice + AssurancePrice;
+  const formattedSubTotalPrice = formatPrice(SubTotalPrice);
+  const formattedAssurancePrice = formatPrice(AssurancePrice);
+  const formattedFullPrice = formatPrice(fullPrice);
+
   function handleConfirmPurchase(data: FormData) {
     console.log(data);
+  }
+
+  let currentPayment;
+
+  if (selectedPaymentMethod === 'credit-card') {
+    currentPayment = <CardPayment />;
+  }
+
+  if (selectedPaymentMethod === 'pix') {
+    currentPayment = <PixPayment />;
   }
 
   return (
@@ -75,6 +100,7 @@ export function CheckoutPage() {
                       {...register('quantityOfPeople')}
                       autoComplete="quantity-of-people"
                       className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
+                      onChange={(e) => setNumOfPeople(Number(e.target.value))}
                     >
                       <option value={1}>1</option>
                       <option value={2}>2</option>
@@ -98,8 +124,11 @@ export function CheckoutPage() {
                       className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
                       defaultValue="09:00"
                     >
-                      <option value="17:00">17:00</option>
-                      <option value="20:00">20:00</option>
+                      {routeData.availableHours.map((hour) => (
+                        <option key={hour} value={hour}>
+                          {hour}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 </div>
@@ -253,26 +282,19 @@ export function CheckoutPage() {
               </h2>
 
               <fieldset className="mt-4">
-                <legend className="sr-only">Payment type</legend>
+                <legend className="sr-only">Tipo de pagamento</legend>
                 <div className="space-y-4 sm:flex sm:items-center sm:space-x-10 sm:space-y-0">
                   {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
                     <div key={paymentMethod.id} className="flex items-center">
-                      {paymentMethodIdx === 0 ? (
-                        <input
-                          id={paymentMethod.id}
-                          name="payment-type"
-                          type="radio"
-                          defaultChecked
-                          className="h-4 w-4 border-gray-300 text-green-800 focus:ring-green-800"
-                        />
-                      ) : (
-                        <input
-                          id={paymentMethod.id}
-                          name="payment-type"
-                          type="radio"
-                          className="h-4 w-4 border-gray-300 text-green-800 focus:ring-green-800"
-                        />
-                      )}
+                      <input
+                        id={paymentMethod.id}
+                        name="payment-type"
+                        type="radio"
+                        onChange={() =>
+                          setSelectedPaymentMethod(paymentMethod.id)
+                        }
+                        className="h-4 w-4 border-gray-300 text-green-800 focus:ring-green-800"
+                      />
 
                       <label className="ml-3 block font-fredoka text-sm font-medium text-gray-700">
                         {paymentMethod.title}
@@ -282,67 +304,7 @@ export function CheckoutPage() {
                 </div>
               </fieldset>
 
-              <div className="mt-6 grid grid-cols-4 gap-x-4 gap-y-6">
-                <div className="col-span-4">
-                  <label className="block font-fredoka text-sm font-medium text-gray-700">
-                    Número do cartão
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="card-number"
-                      name="card-number"
-                      autoComplete="cc-number"
-                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div className="col-span-4">
-                  <label className="block font-fredoka text-sm font-medium text-gray-700">
-                    Nome no cartão
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      id="name-on-card"
-                      name="name-on-card"
-                      autoComplete="cc-name"
-                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div className="col-span-3">
-                  <label className="block font-fredoka text-sm font-medium text-gray-700">
-                    Validade (MM/YY)
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="expiration-date"
-                      id="expiration-date"
-                      autoComplete="cc-exp"
-                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block font-fredoka text-sm font-medium text-gray-700">
-                    CVC
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="cvc"
-                      id="cvc"
-                      autoComplete="csc"
-                      className="block w-full rounded-md border-gray-300 font-fredoka shadow-sm focus:border-green-800 focus:ring-green-800 sm:text-sm"
-                    />
-                  </div>
-                </div>
-              </div>
+              {currentPayment}
             </div>
           </div>
 
@@ -353,66 +315,70 @@ export function CheckoutPage() {
             </h2>
 
             <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
-              <h3 className="sr-only">Items in your cart</h3>
-              <ul role="list" className="divide-y divide-gray-200">
-                {products.map((product) => (
-                  <li key={product.id} className="flex px-4 py-6 sm:px-6">
-                    <div className="flex-shrink-0">
-                      <img
-                        src={product.imageSrc}
-                        alt={product.imageAlt}
-                        className="w-48 rounded-md"
-                      />
+              <h3 className="sr-only">Rota Selecionada</h3>
+              <div className="flex px-4 py-6 sm:px-6">
+                <div className="flex-shrink-0">
+                  <img src={routeData.images[0]} className="w-48 rounded-md" />
+                </div>
+                <div className="ml-6 flex flex-1 flex-col">
+                  <div className="flex">
+                    <div className="min-w-0 flex-1">
+                      <h4 className="text-sm">
+                        <a
+                          href={`/routes/${routeData.slug}`}
+                          className="font-medium text-gray-700 hover:text-gray-800"
+                        >
+                          {routeData.name}
+                        </a>
+                      </h4>
                     </div>
-                    <div className="ml-6 flex flex-1 flex-col">
-                      <div className="flex">
-                        <div className="min-w-0 flex-1">
-                          <h4 className="text-sm">
-                            <a
-                              href={product.href}
-                              className="font-medium text-gray-700 hover:text-gray-800"
-                            >
-                              {product.title}
-                            </a>
-                          </h4>
-                        </div>
-                      </div>
-                      <div className="my-1" />
-                      <div className="flex items-center gap-2">
-                        <UserGroupIcon className="h-4 w-4 text-green-800" />
-                        <span className="font-fredoka text-sm">1 pessoas</span>
-                      </div>
-                      <div className="my-1" />
-                      <div className="flex items-center gap-2">
-                        <CalendarIcon className="h-4 w-4 text-green-800" />
-                        <span className="font-fredoka text-sm">24 mar</span>
-                      </div>
-                      <div className="flex flex-1 items-end justify-between pt-2">
-                        <p className="mt-1 font-fredoka text-sm font-medium text-gray-900">
-                          {product.price} / pessoa
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                  </div>
+                  <div className="my-1" />
+                  <div className="flex items-center gap-2">
+                    <UserGroupIcon className="h-4 w-4 text-green-800" />
+                    <span className="font-fredoka text-sm">
+                      {numOfPeople} pessoas
+                    </span>
+                  </div>
+                  <div className="my-1" />
+                  <div className="flex items-center gap-2">
+                    <CalendarIcon className="h-4 w-4 text-green-800" />
+                    <span className="font-fredoka text-sm">
+                      {new Intl.DateTimeFormat('pt-BR', {
+                        day: 'numeric',
+                        month: 'long',
+                      }).format(new Date(routeData.dueDate))}
+                    </span>
+                  </div>
+                  <div className="flex flex-1 items-end justify-between pt-2">
+                    <p className="mt-1 font-fredoka text-sm font-medium text-gray-900">
+                      {new Intl.NumberFormat('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      }).format(routeData.priceWithDiscount)}{' '}
+                      / pessoa
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
                 <div className="flex items-center justify-between">
                   <dt className="text-sm">Subtotal</dt>
                   <dd className="font-fredoka text-sm font-medium text-gray-900">
-                    R$ 64.00
+                    {formattedSubTotalPrice}
                   </dd>
                 </div>
                 <div className="flex items-center justify-between">
                   <dt className="text-sm">Seguro</dt>
                   <dd className="font-fredoka text-sm font-medium text-gray-900">
-                    R$ 5.00
+                    {formattedAssurancePrice}
                   </dd>
                 </div>
                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                   <dt className="text-base font-medium">Total</dt>
                   <dd className="font-fredoka text-base font-medium text-gray-900">
-                    R$ 75.52
+                    {formattedFullPrice}
                   </dd>
                 </div>
               </dl>
