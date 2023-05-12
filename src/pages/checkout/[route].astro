@@ -1,0 +1,19 @@
+---
+import { CheckoutPage } from '../../components/react/CheckoutPage';
+import Document from '../../layouts/Document.astro';
+import { routes } from '../../temp/routes';
+
+export function getStaticPaths() {
+  return routes.map((route) => ({
+    params: { route: route.slug },
+  }));
+}
+
+const { route } = Astro.params;
+
+const routeData = routes.find((r) => r.slug === route)!;
+---
+
+<Document title="Eco Rota | Finalizar Pedido">
+  <CheckoutPage client:load routeData={routeData} />
+</Document>
