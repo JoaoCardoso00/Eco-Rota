@@ -1,6 +1,6 @@
 ---
 import Document from '../../layouts/Document.astro';
-import Star from '../../components/star.astro';
+import Star from '../../components/star.astro'
 import { routes } from '../../temp/routes';
 
 export function getStaticPaths() {
@@ -43,23 +43,23 @@ const formattedPriceWithDiscount = new Intl.NumberFormat('pt-BR', {
         class="aspect-h-4 aspect-w-3 hidden overflow-hidden rounded-lg lg:block"
       >
         <img
-          src="https://images.pexels.com/photos/1974521/pexels-photo-1974521.jpeg?cs=srgb&dl=pexels-julia-kuzenkov-1974521.jpg&fm=jpg"
-          alt="Two each of gray, white, and black shirts laying flat."
+          src={routeData.images[1]}
+          alt="Imagem da ilha"
           class="h-full w-full object-cover object-center"
         />
       </div>
       <div class="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
         <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
           <img
-            src="https://lp-cms-production.imgix.net/2021-02/Saud_Beach_G.jpg?auto=format&q=75&w=1920"
-            alt="Model wearing plain black basic tee."
+            src={routeData.images[0]}
+            alt="Imagem da ilha"
             class="h-full w-full object-cover object-center"
           />
         </div>
         <div class="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
           <img
-            src="https://assets.citynavigator.nl/thumb/mzPOu3M6oOk8xm1796569naPJdZSOumeuiG06cSPD_E/resizing_type:fit/width:1200/height:0/gravity:sm/enlarge:0/aHR0cHM6Ly9hc3NldHMuY2l0eW5hdmlnYXRvci5ubC9rdW1hLW5vb3Jkd2lqay91cGxvYWRzL21lZGlhLzYyNzEzOGNjZTM0Yzcvem9tZXItc3RyYW5kLXBhcmFzb2wtamVhbmV0dGUtdmFuLXN0YXJrZW5idXJnLTEuanBn.jpg"
-            alt="Model wearing plain gray basic tee."
+            src={routeData.images[2]}
+            alt="Imagem da ilha"
             class="h-full w-full object-cover object-center"
           />
         </div>
@@ -68,8 +68,7 @@ const formattedPriceWithDiscount = new Intl.NumberFormat('pt-BR', {
         class="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg"
       >
         <img
-          src="https://images.pexels.com/photos/240526/pexels-photo-240526.jpeg?cs=srgb&dl=pexels-asad-photo-maldives-240526.jpg&fm=jpg"
-          alt="Model wearing plain white basic tee."
+          src={routeData.images[3]}
           class="h-full w-full object-cover object-center"
         />
       </div>

@@ -166,7 +166,7 @@ export function CheckoutPage({ routeData }: Props) {
                     />
                   </div>
                 </div>
-                <div>
+                <div className="col-span-2 sm:col-span-1">
                   <label
                     className={`block font-fredoka text-sm font-medium text-gray-700 ${
                       errors.firstName ? 'text-red-500' : ''
@@ -188,7 +188,7 @@ export function CheckoutPage({ routeData }: Props) {
                   </div>
                 </div>
 
-                <div>
+                <div className="col-span-2 sm:col-span-1">
                   <label
                     className={`block font-fredoka text-sm font-medium text-gray-700 ${
                       errors.lastName ? 'text-red-500' : ''
@@ -232,7 +232,7 @@ export function CheckoutPage({ routeData }: Props) {
                   </div>
                 </div>
 
-                <div>
+                <div className="col-span-2 sm:col-span-1">
                   <label className="block font-fredoka text-sm font-medium text-gray-700">
                     Gênero
                   </label>
@@ -316,17 +316,20 @@ export function CheckoutPage({ routeData }: Props) {
 
             <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
               <h3 className="sr-only">Rota Selecionada</h3>
-              <div className="flex px-4 py-6 sm:px-6">
+              <div className="flex flex-col px-4 py-6 sm:flex-row sm:px-6">
                 <div className="flex-shrink-0">
-                  <img src={routeData.images[0]} className="w-48 rounded-md" />
+                  <img
+                    src={routeData.images[0]}
+                    className="mx-auto w-full rounded-md sm:w-48"
+                  />
                 </div>
-                <div className="ml-6 flex flex-1 flex-col">
+                <div className="mx-auto mt-10 flex flex-1 flex-col sm:ml-6 sm:mt-0 sm:mr-0">
                   <div className="flex">
                     <div className="min-w-0 flex-1">
-                      <h4 className="text-sm">
+                      <h4 className="text-center sm:text-start">
                         <a
                           href={`/routes/${routeData.slug}`}
-                          className="font-medium text-gray-700 hover:text-gray-800"
+                          className="text-2xl font-medium text-gray-700 hover:text-gray-800 sm:text-xl"
                         >
                           {routeData.name}
                         </a>
@@ -334,30 +337,32 @@ export function CheckoutPage({ routeData }: Props) {
                     </div>
                   </div>
                   <div className="my-1" />
-                  <div className="flex items-center gap-2">
-                    <UserGroupIcon className="h-4 w-4 text-green-800" />
-                    <span className="font-fredoka text-sm">
-                      {numOfPeople} pessoas
-                    </span>
-                  </div>
-                  <div className="my-1" />
-                  <div className="flex items-center gap-2">
-                    <CalendarIcon className="h-4 w-4 text-green-800" />
-                    <span className="font-fredoka text-sm">
-                      {new Intl.DateTimeFormat('pt-BR', {
-                        day: 'numeric',
-                        month: 'long',
-                      }).format(new Date(routeData.dueDate))}
-                    </span>
-                  </div>
-                  <div className="flex flex-1 items-end justify-between pt-2">
-                    <p className="mt-1 font-fredoka text-sm font-medium text-gray-900">
-                      {new Intl.NumberFormat('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL',
-                      }).format(routeData.priceWithDiscount)}{' '}
-                      / pessoa
-                    </p>
+                  <div className="flex items-center gap-2 sm:ml-0 sm:flex-col sm:items-start sm:gap-0">
+                    <div className="flex items-center gap-2">
+                      <UserGroupIcon className="h-4 w-4 text-green-800" />
+                      <span className="font-fredoka text-sm">
+                        {numOfPeople} pessoas
+                      </span>
+                    </div>
+                    <div className="my-1" />
+                    <div className="flex items-center gap-2">
+                      <CalendarIcon className="h-4 w-4 text-green-800" />
+                      <span className="font-fredoka text-sm">
+                        {new Intl.DateTimeFormat('pt-BR', {
+                          day: 'numeric',
+                          month: 'long',
+                        }).format(new Date(routeData.dueDate))}
+                      </span>
+                    </div>
+                    <div className="flex flex-1 items-end justify-between sm:pt-2">
+                      <p className="font-fredoka text-sm font-medium text-gray-900 sm:mt-1">
+                        {new Intl.NumberFormat('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                        }).format(routeData.priceWithDiscount)}{' '}
+                        / pessoa
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
