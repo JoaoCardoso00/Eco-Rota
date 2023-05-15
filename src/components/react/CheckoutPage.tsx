@@ -351,6 +351,7 @@ export function CheckoutPage({ routeData }: Props) {
                         {new Intl.DateTimeFormat('pt-BR', {
                           day: 'numeric',
                           month: 'long',
+                          year: 'numeric',
                         }).format(new Date(routeData.dueDate))}
                       </span>
                     </div>

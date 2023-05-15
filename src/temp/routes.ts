@@ -5,7 +5,7 @@ export const routes: Route[] = [
     name: 'Praia vai quem quer',
     slug: 'praia-vai-quem-quer',
     duration: '4 a 5 Horas',
-    dueDate: new Date('2021-03-23'),
+    dueDate: new Date('2024-07-15'),
     availableHours: ['09:00', '17:00'],
     experience: ['Alimentação inclusa', 'Transporte incluso'],
     description: [
@@ -28,10 +28,11 @@ export const routes: Route[] = [
     reviews: [
       {
         name: 'João da Silva',
-        avatar: '/img/avatar.webp',
+        avatar:
+          'https://st3.depositphotos.com/1767687/16607/v/600/depositphotos_166074422-stock-illustration-default-avatar-profile-icon-grey.jpg',
         reviewTitle: 'Muito bom',
         review: 'Muito bom, recomendo',
-        rating: 5,
+        rating: 3,
       },
     ],
   },
